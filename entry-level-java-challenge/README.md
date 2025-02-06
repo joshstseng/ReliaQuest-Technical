@@ -6,7 +6,7 @@ Please keep the following in mind while working on this challenge:
 * Use clean coding etiquette
   * E.g. avoid liberal use of new-lines, odd variable and method names, random indentation, etc...
 * Test cases are not required
-hi
+
 ## Problem Statement
 
 Your employer has recently purchased a license to top-tier SaaS platform, Employees-R-US, to off-load all employee management responsibilities.
