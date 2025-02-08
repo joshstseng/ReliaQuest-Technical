@@ -5,7 +5,6 @@ import java.util.UUID;
 
 // import com.challenge.api.model.Employee;
 
-
 // Employee implementation as a class
 public class EmployeeImpl implements Employee {
 
@@ -20,9 +19,16 @@ public class EmployeeImpl implements Employee {
     Instant contractHireDate;
     Instant contractTerminationDate;
 
-    public EmployeeImpl(UUID uuid, String firstName, String lastName, String fullName, 
-                Integer salary, Integer age, String jobTitle, String email, 
-                Instant contractHireDate) {
+    public EmployeeImpl(
+            UUID uuid,
+            String firstName,
+            String lastName,
+            String fullName,
+            Integer salary,
+            Integer age,
+            String jobTitle,
+            String email,
+            Instant contractHireDate) {
 
         this.uuid = uuid;
         this.firstName = firstName;

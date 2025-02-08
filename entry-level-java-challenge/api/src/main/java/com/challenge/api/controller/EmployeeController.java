@@ -1,28 +1,11 @@
 package com.challenge.api.controller;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.challenge.api.model.Employee;
 import com.challenge.api.model.EmployeeRepository;
-
-
-/*
-original
-package com.challenge.api.controller;
-
-import com.challenge.api.model.Employee;
 import java.util.List;
 import java.util.UUID;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
-
-*/
 
 /**
  * Fill in the missing aspects of this Spring Web REST Controller. Don't forget to add a Service layer.
@@ -51,7 +34,7 @@ public class EmployeeController {
      * @return Requested Employee if exists
      */
     public Employee getEmployeeByUuid(UUID uuid) {
-        
+
         // Returns null if no employee matches uuid
         Employee e = repository.getEmployeeByUuid(uuid);
         return e;
@@ -65,20 +48,27 @@ public class EmployeeController {
      * @return Newly created Employee
      */
     public Employee createEmployee(Object requestBody) {
-        
-        // assuming that the object passed in is an Employee or EmployeeImpl 
 
-        if (requestBody instanceof  Employee) {
-            Employee e = (Employee)requestBody; // cast body to employee
+        // assuming that the object passed in is an Employee or EmployeeImpl
+        if (requestBody instanceof Employee) {
+            Employee e = (Employee) requestBody; // cast body to employee
 
-            repository.addEmployee(e.getUuid(), e.getFirstName(), e.getLastName(),
-                           e.getFullName(), e.getSalary(), e.getAge(),
-                           e.getJobTitle(), e.getEmail(), e.getContractHireDate());
-            return e;
+            // create and add the employee to the repository
+            repository.addEmployee(
+                    e.getUuid(),
+                    e.getFirstName(),
+                    e.getLastName(),
+                    e.getFullName(),
+                    e.getSalary(),
+                    e.getAge(),
+                    e.getJobTitle(),
+                    e.getEmail(),
+                    e.getContractHireDate());
+
+            return e; // return new employee
         } else {
             throw new IllegalArgumentException("Invalid object type. Expected Employee.");
         }
-
         // throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
     }
 }
