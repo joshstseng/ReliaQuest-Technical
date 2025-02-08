@@ -3,10 +3,8 @@ package com.challenge.api.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.challenge.api.model.Employee;
 import com.challenge.api.model.EmployeeRepository;
@@ -53,8 +51,12 @@ public class EmployeeController {
      * @return Requested Employee if exists
      */
     public Employee getEmployeeByUuid(UUID uuid) {
-        // TODO
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        
+        // Returns null if no employee matches uuid
+        Employee e = repository.getEmployeeByUuid(uuid);
+        return e;
+
+        // throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
     }
 
     /**
@@ -63,7 +65,20 @@ public class EmployeeController {
      * @return Newly created Employee
      */
     public Employee createEmployee(Object requestBody) {
-        // TODO
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        
+        // assuming that the object passed in is an Employee or EmployeeImpl 
+
+        if (requestBody instanceof  Employee) {
+            Employee e = (Employee)requestBody; // cast body to employee
+
+            repository.addEmployee(e.getUuid(), e.getFirstName(), e.getLastName(),
+                           e.getFullName(), e.getSalary(), e.getAge(),
+                           e.getJobTitle(), e.getEmail(), e.getContractHireDate());
+            return e;
+        } else {
+            throw new IllegalArgumentException("Invalid object type. Expected Employee.");
+        }
+
+        // throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
     }
 }
